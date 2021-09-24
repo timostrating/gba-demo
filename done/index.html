@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Save The GameBoy!</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<script>
+
+
+			window.onload = function() {
+				document.getElementById("container").src = "about:blank";
+
+				// TO KEEP FOCUS IN THE CONTAINER
+				setInterval(function() {
+					document.getElementById("container").focus();
+				}, 250);
+				fetch("main.gba").then(response => {
+					console.log("main fetched")
+					console.log(response);
+					return response.arrayBuffer();
+				}).then(buffer => {
+					console.log("buffer loaded");
+					console.log(buffer);
+					ROMDATA = buffer;
+					ROMFILENAME = "main.gba";
+
+
+					// DISPLAYING THE EMULATOR CONTAINER
+					document.getElementById("container").style.display = "block";
+					document.getElementById("container").focus();
+
+					// CLEARING THE SELECTED FILE VALUE
+					document.getElementById("container").src = "Emulatrix_GameBoyAdvance.htm";
+					document.getElementById("container").onload = () => {
+                        console.log("Loaded");
+					}
+				}).catch(err=>console.error(err));
+			}
+
+
+		</script>
+
+        <div class="console">
+            <div class="screen">
+                <iframe id="container" src="about:blank"></iframe>
+            </div>
+        </div>
+
+		<div class="gui_menu_fileloader">
+
+			<a id="download-button" href="main.gba" download>
+				Download main.gba
+			</a>
+
+
+		</div>
+		
+	</body>
+</html>

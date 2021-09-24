@@ -1,3 +1,7 @@
+# before doing this install https://devkitpro.org/
+
+
+
 # Compile main.c to main.o
 arm-none-eabi-gcc -mthumb -mthumb-interwork -c main.c
 
